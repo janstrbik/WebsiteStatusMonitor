@@ -8,8 +8,8 @@ description: >-
 
 license: Apache-2.0
 
-sourceUrl: https://github.com/your-org/website-status-monitor
-releaseNotesUrl: https://github.com/your-org/website-status-monitor/releases
+sourceUrl: https://github.com/janstrbik/WebsiteStatusMonitor
+releaseNotesUrl: https://github.com/janstrbik/WebsiteStatusMonitor/releases
 
 author:
   authorName: Your Name
@@ -32,9 +32,10 @@ resources:
       Scheduled function that checks website status and reports to Logmill
     properties:
       location: ${LOCATION}
+      runtime: nodejs18
       scheduleTrigger:
         schedule: ${SCHEDULE_INTERVAL}
-      runtime: nodejs18
+      sourceDirectory: functions
 
 params:
   - param: LOCATION

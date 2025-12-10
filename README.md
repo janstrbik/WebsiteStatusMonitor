@@ -54,14 +54,6 @@ During installation, you'll configure:
    - ❌ **Offline**: Reports `CriticalError` status to Logmill
 4. **Logmill Alerts**: Configure alerts in Logmill to get notified
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│   Cloud      │────▶│   Your       │────▶│   Logmill    │
-│   Scheduler  │     │   Website    │     │   Dashboard  │
-└──────────────┘     └──────────────┘     └──────────────┘
-   Every X mins        Check status         Report & Alert
-```
-
 ## 📝 Usage
 
 ### View Logs
@@ -150,8 +142,8 @@ This extension uses:
 
 ## 🤝 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/website-status-monitor/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/website-status-monitor/discussions)
+- **Issues**: [GitHub Issues](https://github.com/janstrbik/WebsiteStatusMonitor/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/janstrbik/WebsiteStatusMonitor/discussions)
 - **Firebase Support**: [Firebase Support Center](https://firebase.google.com/support)
 
 ## 📄 License
