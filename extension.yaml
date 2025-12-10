@@ -1,5 +1,5 @@
 name: website-status-monitor
-version: 0.0.1
+version: 0.0.3
 specVersion: v1beta
 
 displayName: Website Status Monitor with Logmill
@@ -12,12 +12,12 @@ sourceUrl: https://github.com/janstrbik/WebsiteStatusMonitor
 releaseNotesUrl: https://github.com/janstrbik/WebsiteStatusMonitor/releases
 
 author:
-  authorName: Your Name
-  url: https://yourwebsite.com
+  authorName: Jan Strbik
+  url: https://github.com/janstrbik
 
 contributors:
-  - authorName: Your Name
-    url: https://yourwebsite.com
+  - authorName: Jan Strbik
+    url: https://github.com/janstrbik
 
 billingRequired: true
 
@@ -32,7 +32,7 @@ resources:
       Scheduled function that checks website status and reports to Logmill
     properties:
       location: ${LOCATION}
-      runtime: nodejs18
+      runtime: nodejs20
       scheduleTrigger:
         schedule: ${SCHEDULE_INTERVAL}
       sourceDirectory: functions

@@ -1,15 +1,15 @@
-import * as functions from "firebase-functions/v2";
+import { onSchedule } from "firebase-functions/v2/scheduler";
 import axios from "axios";
 import { eCodeLanguage, eSensorType } from "./enums";
 import { LogmillSensor } from "./interfaces";
 
-export const logmillSensor = functions.scheduler.onSchedule(
+export const logmillSensor = onSchedule(
   {
     schedule: process.env.SCHEDULE_INTERVAL || "every 5 minutes",
     timeoutSeconds: 60,
     memory: "256MiB",
   },
-  async () => {
+  async (event) => {
     const websiteUrl = process.env.WEBSITE_URL;
     const logmillKey = process.env.LOGMILL_KEY;
     const environment = process.env.ENVIRONMENT || "LIVE";
@@ -42,7 +42,7 @@ export const logmillSensor = functions.scheduler.onSchedule(
       // Check website availability
       const response = await axios.get(websiteUrl, {
         timeout: timeoutMs,
-        validateStatus: (status) => status < 500, // Accept 4xx as "online"
+        validateStatus: (status) => status < 500, // Accept 4xx as online
       });
 
       // Report operational status to Logmill
