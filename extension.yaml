@@ -1,0 +1,123 @@
+name: website-status-monitor
+version: 0.0.1
+specVersion: v1beta
+
+displayName: Website Status Monitor with Logmill
+description: >-
+  Monitors website availability and reports status to Logmill at configurable intervals.
+
+license: Apache-2.0
+
+sourceUrl: https://github.com/your-org/website-status-monitor
+releaseNotesUrl: https://github.com/your-org/website-status-monitor/releases
+
+author:
+  authorName: Your Name
+  url: https://yourwebsite.com
+
+contributors:
+  - authorName: Your Name
+    url: https://yourwebsite.com
+
+billingRequired: true
+
+roles:
+  - role: datastore.user
+    reason: Required for Cloud Scheduler to trigger the function
+
+resources:
+  - name: logmillSensor
+    type: firebaseextensions.v1beta.function
+    description: >-
+      Scheduled function that checks website status and reports to Logmill
+    properties:
+      location: ${LOCATION}
+      scheduleTrigger:
+        schedule: ${SCHEDULE_INTERVAL}
+      runtime: nodejs18
+
+params:
+  - param: LOCATION
+    label: Cloud Functions location
+    description: >-
+      Where do you want to deploy the functions created for this extension?
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Los Angeles (us-west2)
+        value: us-west2
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+    default: us-central1
+    required: true
+    immutable: true
+
+  - param: WEBSITE_URL
+    label: Website URL to monitor
+    description: >-
+      The full URL of the website you want to monitor (including https://)
+    type: string
+    example: https://example.com
+    validationRegex: ^https?:\/\/.+
+    validationErrorMessage: Must be a valid URL starting with http:// or https://
+    required: true
+
+  - param: LOGMILL_KEY
+    label: Logmill API Key
+    description: >-
+      Your Logmill API credentials in the format: apiKey|secret|endpoint
+    type: secret
+    example: your_key|your_secret|https://api.logmill.io/v1
+    required: true
+
+  - param: ENVIRONMENT
+    label: Environment Name
+    description: >-
+      The environment name for Logmill reporting (e.g., LIVE, DEV, STAGING)
+    type: string
+    default: LIVE
+    required: true
+
+  - param: SCHEDULE_INTERVAL
+    label: Check Interval
+    description: >-
+      How often should the website be checked? Use Cloud Scheduler cron syntax.
+    type: select
+    options:
+      - label: Every 1 minute
+        value: every 1 minutes
+      - label: Every 5 minutes
+        value: every 5 minutes
+      - label: Every 10 minutes
+        value: every 10 minutes
+      - label: Every 15 minutes
+        value: every 15 minutes
+      - label: Every 30 minutes
+        value: every 30 minutes
+      - label: Every 1 hour
+        value: every 1 hours
+    default: every 5 minutes
+    required: true
+
+  - param: TIMEOUT_MS
+    label: Request Timeout (milliseconds)
+    description: >-
+      How long to wait for the website to respond before marking it as down
+    type: string
+    default: "5000"
+    validationRegex: ^\d+$
+    validationErrorMessage: Must be a positive number
+    required: true
